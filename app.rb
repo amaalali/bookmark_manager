@@ -1,4 +1,6 @@
 require 'sinatra/base'
+require 'rubygems'
+require 'data_mapper'
 
 class BookmarkManager < Sinatra::Base
   get '/' do
