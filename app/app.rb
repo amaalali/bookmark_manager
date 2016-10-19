@@ -11,6 +11,10 @@ class BookmarkManager < Sinatra::Base
     erb(:links)
   end
 
+  get '/' do
+    redirect '/links'	  
+  end
+
   get '/links/new' do
     erb(:'links/new')
   end
