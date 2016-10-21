@@ -1,43 +1,44 @@
+
 feature 'sign up' do
 
-  before do
-    visit '/'
-    click_button 'Register'
-    fill_in 'first_name', with: 'Alan'
-    fill_in 'last_name', with: 'Shearer'
-    fill_in 'email', with: 'alan@nufc.com'
-    fill_in 'password', with: '1234'
-  end
-
   it 'allows a new user to sign up' do
-    fill_in 'password_confirmation', with: '1234'
+    sign_up
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(1)
     expect(page).to have_content 'WELCOME, Alan'
     expect(User.first.email).to eq('alan@nufc.com')
   end
 
   it 'informs the user if they have not enetered two identical passwords' do
-    fill_in 'password_confirmation', with: '123'
+    sign_up_non_matching_passwords
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
     expect(current_path).to eq '/register'
-    expect(page).to have_content('Password and confirmation password do not match')
+    expect(page).to have_content('Password does not match the confirmation')
   end
 end
 
 feature 'incorrect sign up' do
 
   before do
-    visit '/'
-    click_button 'Register'
-    fill_in 'first_name', with: 'Alan'
-    fill_in 'last_name', with: 'Shearer'
-    fill_in 'password', with: '1234'
+    sign_up
   end
 
   it 'user cannot sign up if they have not entered an email' do
-    fill_in 'password_confirmation', with: '1234'
-    
+    fill_in 'email', with: ''
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
-    # expect(page).to have_content('Please enter a password')
+  end
+
+  it 'user cannot sign up with an invalid email' do
+    fill_in 'email', with: '1234@email'
+    expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
+  end
+end
+
+feature 'Email address already exists' do
+  it 'user can not sign up with an already registered email address' do
+    sign_up
+    click_button 'Sign up'
+    sign_up
+    expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
+    expect(page).to have_content('Email is already taken')
   end
 end
