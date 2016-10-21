@@ -2,11 +2,11 @@
   <h1>Sign up:</h1>
   <form action="/register" method="post">
     <label for="first_name">
-      First name: <input type="text" name="first_name">
+      First name: <input type="text" name="first_name" value='<%= @user.first_name %>'>
     </label>
 
     <label for="last_name">
-      Last name: <input type="text" name="last_name">
+      Last name: <input type="text" name="last_name" value='<%= @user.last_name %>'>
     </label>
 
     <label for="email">

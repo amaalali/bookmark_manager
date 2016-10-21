@@ -17,3 +17,10 @@ def sign_up_non_matching_passwords
   fill_in 'password', with: '1234'
   fill_in 'password_confirmation', with: 'abcd'
 end
+
+def sign_in
+  visit '/sign_in'
+  fill_in 'email', with: 'alan@nufc.com'
+  fill_in 'password', with: '1234'
+  click_button 'Sign in'
+end
