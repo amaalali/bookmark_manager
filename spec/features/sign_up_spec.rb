@@ -1,4 +1,4 @@
-feature 'sign in' do
+feature 'sign up' do
 
   before do
     visit '/'
@@ -8,6 +8,7 @@ feature 'sign in' do
     fill_in 'email', with: 'alan@nufc.com'
     fill_in 'password', with: '1234'
   end
+
   it 'allows a new user to sign up' do
     fill_in 'password_confirmation', with: '1234'
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(1)
@@ -20,5 +21,23 @@ feature 'sign in' do
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
     expect(current_path).to eq '/register'
     expect(page).to have_content('Password and confirmation password do not match')
+  end
+end
+
+feature 'incorrect sign up' do
+
+  before do
+    visit '/'
+    click_button 'Register'
+    fill_in 'first_name', with: 'Alan'
+    fill_in 'last_name', with: 'Shearer'
+    fill_in 'password', with: '1234'
+  end
+
+  it 'user cannot sign up if they have not entered an email' do
+    fill_in 'password_confirmation', with: '1234'
+    
+    expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
+    # expect(page).to have_content('Please enter a password')
   end
 end
