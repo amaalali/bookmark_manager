@@ -17,7 +17,8 @@ feature 'sign in' do
 
   it 'informs the user if they have not enetered two identical passwords' do
     fill_in 'password_confirmation', with: '123'
-    # expect{ click_button 'Sign up' }.to raise_error 'The passwords entered do not match'
     expect{ click_button 'Sign up' }.to change{ User.all.count }.by(0)
+    expect(current_path).to eq 'user/register'
+    expect(page).to have_content('Password and confirmation password do not match')
   end
 end
