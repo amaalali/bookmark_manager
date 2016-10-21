@@ -6,6 +6,6 @@ feature 'sign in' do
 
   scenario 'allows a user to sign in' do
     sign_in
-    expect(page).to have content 'WELCOME, Alan'
+    expect(page).to have_content 'WELCOME, Alan'
   end
 end

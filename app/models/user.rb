@@ -20,20 +20,12 @@ class User
     self.password_digest = BCrypt::Password.create(password)
   end
 
-
-  # def login
-  #   @user = User.find_by_email(params[:email])
-  #   if @user.password == params[:password]
-  #     # give_token
-  #   else
-  #     # redirect_to home_url
-  #   end
-  # end
-  # def login(password)
-  #   if @user.password == password
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
+  def self.authenticate(email, password)
+    user = first(email: email)
+    if user && BCrypt::Password.new(user.password_digest) == password
+      user
+    else
+      nil
+    end
+  end
 end
