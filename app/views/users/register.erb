@@ -1,6 +1,6 @@
 <body>
   <h1>Sign up:</h1>
-  <form action="/register" method="post">
+  <form action="/user/register" method="post">
     <label for="first_name">
       First name: <input type="text" name="first_name" value='<%= @user.first_name %>'>
     </label>
@@ -14,11 +14,11 @@
     </label>
 
     <label for="password">
-      Password: <input type="password" name="password">
+      Password: <input type="password" name="password" required>
     </label>
 
     <label for="password_confirmation">
-      Confirm password: <input type="password" name="password_confirmation">
+      Confirm password: <input type="password" name="password_confirmation" required>
     </label>
 
     <input type="submit" value="Sign up">

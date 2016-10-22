@@ -14,13 +14,13 @@ class BookmarkManager < Sinatra::Base
     erb :'users/welcome'
   end
 
-  get 'user/register' do
+  get '/user/register' do
     @user = User.new
     erb :'users/register'
   end
 
-  post '/register' do
-      @user = User.new(first_name:               params[:first_name],
+  post '/user/register' do
+      @user = User.new(first_name:              params[:first_name],
                          last_name:             params[:last_name],
                          email:                 params[:email],
                          password:              params[:password],
@@ -35,11 +35,11 @@ class BookmarkManager < Sinatra::Base
       end
   end
 
-  get '/sign-in' do
+  get '/user/sign-in' do
     erb :'users/sign_in'
   end
 
-  post '/sign-in' do
+  post '/user/sign-in' do
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
@@ -59,7 +59,7 @@ class BookmarkManager < Sinatra::Base
     erb :'links/new'
   end
 
-  post '/links' do
+  post '/links/new' do
     link = Link.create(url: params[:url], title: params[:title])
     tags = params[:tags].split(", ")
     tags.each do |tag|

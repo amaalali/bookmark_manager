@@ -14,7 +14,7 @@ def sign_up_non_matching_passwords
 end
 
 def sign_in
-  visit '/sign-in'
+  visit '/user/sign-in'
   fill_in 'email', with: 'alan@nufc.com'
   fill_in 'password', with: '1234'
   click_button 'Sign in'
