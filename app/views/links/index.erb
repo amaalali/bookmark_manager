@@ -1,14 +1,10 @@
-<!-- <% if current_user %>
-  <h1> Welcome, <%= current_user.first_name %> </h1>
-<% end %> -->
-
 <h1> Links </h1>
-
 
 <form action="/links/new">
   <input type="submit" value="Create New Bookmark">
 </form>
 <br />
+
 <ul id='links'>
   <% @links.each do |link| %>
     <li>

@@ -8,6 +8,7 @@
     <% if current_user %>
       WELCOME, <%= current_user.first_name %>
     <% end %>
+
     <% if flash[:errors] && !flash[:errors].empty? %>
        Please refer to the following errors below:
        <ul id='errors'>
