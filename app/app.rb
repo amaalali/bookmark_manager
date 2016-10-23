@@ -11,12 +11,12 @@ class BookmarkManager < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    erb :'users/welcome'
+    erb :'user/welcome'
   end
 
   get '/user/register' do
     @user = User.new
-    erb :'users/register'
+    erb :'user/register'
   end
 
   post '/user/register' do
@@ -31,12 +31,12 @@ class BookmarkManager < Sinatra::Base
         redirect to '/links'
       else
         flash.now[:errors] = @user.errors.full_messages
-        erb :'users/register'
+        erb :'user/register'
       end
   end
 
   get '/user/sign-in' do
-    erb :'users/sign_in'
+    erb :'user/sign_in'
   end
 
   post '/user/sign-in' do
@@ -46,7 +46,7 @@ class BookmarkManager < Sinatra::Base
       redirect '/links'
     else
       flash.now[:errors] =  ['User email or password is incorrect']
-      erb :'users/sign_in'
+      erb :'user/sign_in'
     end
   end
 
