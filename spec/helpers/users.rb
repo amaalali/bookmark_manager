@@ -16,10 +16,14 @@ module UserHelpers
     click_button 'Sign up' if click
   end
 
-  def sign_in(email:, password:, click:)
+  def sign_in(email: 'alan@nufc.com', password: '1234', click: true)
      visit '/user/sign-in'
      fill_in :email,    with: email
      fill_in :password, with: password
      click_button 'Sign in' if click
+  end
+
+  def sign_out
+     click_button 'Sign out'
   end
 end
